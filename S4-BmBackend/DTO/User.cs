@@ -5,10 +5,10 @@
         public Weight Weight { get; set; }
         public Goal Goal { get; set; }
         public PersonalTrainer PersonalTrainer { get; set; }
-        public User(int id, string name, string email, string password, string adress, int age, int lenght, DateTime birthday)
+        public User(string forename, string lastname, string email, string password, string adress, int age, int lenght, DateTime birthday)
         {
-            Id = id;
-            Name = name;
+            Forename = forename;
+            Lastname = lastname;
             Email = email;
             Password = password;
             Adress = adress;
@@ -26,7 +26,8 @@
         }
 
         public int Id { get; set; }
-        public string Name { get; private set; }
+        public string Forename { get; private set; }
+        public string Lastname { get; private set; }
         public string Email { get; private set; }
         public string Password { get; private set; }
         public string Adress { get; private set; }
