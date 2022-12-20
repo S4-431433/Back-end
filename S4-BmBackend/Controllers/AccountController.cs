@@ -10,6 +10,7 @@ namespace S4_BmBackend.Controllers
     public class AccountController : ControllerBase
     {
         Account account = new();
+        Goal goal = new();
         private readonly ILogger<AccountController> _logger;
         public AccountController(ILogger<AccountController> logger)
         {
@@ -17,9 +18,15 @@ namespace S4_BmBackend.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetUser()
+        public ActionResult GetUser(int id)
         {
-            return Ok(account.testDatabase());
+            return Ok(account.Get(id));
+        }
+
+        [HttpGet]
+        public ActionResult GetAllUsers()
+        {
+            return Ok(account.GetAll());
         }
 
 
@@ -27,19 +34,20 @@ namespace S4_BmBackend.Controllers
         public ActionResult CreateUser(string forename, string lastname, string email, string password, string adress, int age, int length, DateTime birthday)
         {
             User _user = new(forename, lastname, email, password, adress, age, length, birthday);
-            return Ok(account.CreateUser(_user));
+            return Ok(account.Create(_user));
         }
 
         [HttpPatch]
-        public ActionResult EditUser(int id)
+        public ActionResult EditUser(int id, string forename, string lastname, string email, string password, string adress, int age, int length, DateTime birthday)
         {
-            return Ok("successfully edited user: " + id);
+            User _user = new(forename, lastname, email, password, adress, age, length, birthday);
+            return Ok(account.Edit(id, _user));
         }
 
         [HttpDelete]
-        public ActionResult DeleteUser()
+        public ActionResult DeleteUser(int id)
         {
-            return Ok("succes");
+            return Ok(account.Delete(id));
         }
 
         [HttpGet]

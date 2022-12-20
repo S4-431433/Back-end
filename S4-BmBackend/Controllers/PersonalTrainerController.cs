@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using S4_BmBackend.Logic;
+using S4_BmBackend.Data;
+using S4_BmBackend.DTO;
 
 namespace S4_BmBackend.Controllers
 {
@@ -13,31 +15,32 @@ namespace S4_BmBackend.Controllers
             _logger = logger;
         }
         PtLogic ptLogic = new();
+        Trainer trainer = new();
 
         [HttpGet]
-        public ActionResult GetTrainer()
+        public ActionResult Get(int id)
         {
-            return Ok();
+            return Ok(trainer.Get(id));
         }
 
         [HttpPost]
-        public ActionResult CreateTrainer(int id, string name, int age, string department, string email, string number)
+        public ActionResult Create(string name, int age, string department, string email, string number)
         {
-            ptLogic.CreateTrainer(id, name, age, department, email, number);
-            return Ok();
+            PersonalTrainer _trainer = new(name, age, department, email, number);
+            return Ok(trainer.Create(_trainer));
         }
 
         [HttpPatch]
-        public ActionResult UpdateTrainer(int id, string name, int age, string department, string email, string number)
+        public ActionResult Update(int id, string name, int age, string department, string email, string number)
         {
-            ptLogic.UpdateTrainer(id, name, age, department, email, number);
-            return Ok();
+            PersonalTrainer _trainer = new(name, age, department, email, number);
+            return Ok(trainer.Update(id, _trainer));
         }
 
         [HttpDelete]
-        public ActionResult DeleteTrainer()
+        public ActionResult Delete(int id)
         {
-            return Ok("succes");
+            return Ok(trainer.Delete(id));
         }
     }
 }

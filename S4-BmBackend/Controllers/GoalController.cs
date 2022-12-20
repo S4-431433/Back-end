@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using S4_BmBackend.Logic;
+using S4_BmBackend.Data;
 
 namespace S4_BmBackend.Controllers
 {
@@ -8,6 +9,7 @@ namespace S4_BmBackend.Controllers
 
     public class GoalController : ControllerBase
     {
+        Goal goal = new();
         private readonly ILogger<GoalController> _logger;
         public GoalController(ILogger<GoalController> logger)
         {
@@ -17,7 +19,7 @@ namespace S4_BmBackend.Controllers
         [HttpGet]
         public ActionResult Retrieve(int id)
         {
-            return Ok();
+            return Ok(goal.Get(id));
         }
 
         [HttpGet]

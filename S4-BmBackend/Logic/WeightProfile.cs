@@ -12,7 +12,7 @@ namespace S4_BmBackend.Logic
             return user;
         }
 
-        public void AddData(Weight weight, Goal goal, PersonalTrainer personalTrainer, int id)
+        public void AddData(Weight weight, GoalDTO goal, PersonalTrainer personalTrainer, int id)
         {
             //User user = (User)users.Select(user => user.Id = id);
             if (users[0].Id == id)
