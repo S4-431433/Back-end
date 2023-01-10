@@ -14,13 +14,18 @@ namespace S4_BmBackend.Controllers
         {
             _logger = logger;
         }
-        PtLogic ptLogic = new();
         Trainer trainer = new();
 
         [HttpGet]
         public ActionResult Get(int id)
         {
             return Ok(trainer.Get(id));
+        }
+
+        [HttpGet]
+        public ActionResult GetAll()
+        {
+            return Ok(trainer.GetAll());
         }
 
         [HttpPost]

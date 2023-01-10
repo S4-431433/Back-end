@@ -5,7 +5,7 @@
         public Weight Weight { get; set; }
         public GoalDTO Goal { get; set; }
         public PersonalTrainer PersonalTrainer { get; set; }
-        public User(string forename, string lastname, string email, string password, string adress, int age, int lenght, DateTime birthday)
+        public User(string forename, string lastname, string email, string password, string adress, int age, int lenght, DateTime birthday, string active)
         {
             Forename = forename;
             Lastname = lastname;
@@ -15,9 +15,10 @@
             Age = age;
             Length = lenght;
             Birthday = birthday;
+            Active = active;
         }
 
-        public User(int id, string forename, string lastname, string email, string password, string adress, int age, int lenght, DateTime birthday)
+        public User(int id, string forename, string lastname, string email, string password, string adress, int age, int lenght, DateTime birthday, string active)
         {
             Id = id;
             Forename = forename;
@@ -28,6 +29,7 @@
             Age = age;
             Length = lenght;
             Birthday = birthday;
+            Active=active;
         }
 
         public User(int id, Weight weight, GoalDTO goal, PersonalTrainer personalTrainer)
@@ -56,5 +58,6 @@
         public int Age { get; set; }
         public int Length { get; set; }
         public DateTime Birthday { get; set; }
+        public string Active { get; set; }
     }
 }

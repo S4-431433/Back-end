@@ -31,16 +31,16 @@ namespace S4_BmBackend.Controllers
 
 
         [HttpPost]
-        public ActionResult CreateUser(string forename, string lastname, string email, string password, string adress, int age, int length, DateTime birthday)
+        public ActionResult CreateUser(string forename, string lastname, string email, string password, string adress, int age, int length, DateTime birthday, string active)
         {
-            User _user = new(forename, lastname, email, password, adress, age, length, birthday);
+            User _user = new(forename, lastname, email, password, adress, age, length, birthday, active);
             return Ok(account.Create(_user));
         }
 
         [HttpPatch]
-        public ActionResult EditUser(int id, string forename, string lastname, string email, string password, string adress, int age, int length, DateTime birthday)
+        public ActionResult EditUser(int id, string forename, string lastname, string email, string password, string adress, int age, int length, DateTime birthday, string active)
         {
-            User _user = new(forename, lastname, email, password, adress, age, length, birthday);
+            User _user = new(forename, lastname, email, password, adress, age, length, birthday, active);
             return Ok(account.Edit(id, _user));
         }
 
@@ -54,6 +54,12 @@ namespace S4_BmBackend.Controllers
         public ActionResult GetSubsriptions()
         {
             return Ok();
+        }
+
+        [HttpGet]
+        public ActionResult GetActiveUsers()
+        {
+            return Ok(account.GetActive());
         }
     }
 }

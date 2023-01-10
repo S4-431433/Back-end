@@ -36,6 +36,34 @@ namespace S4_BmBackend.Data
                 return trainers;
             }
         }
+        public List<PersonalTrainer> GetAll()
+        {
+            MySqlConnection conn;
+            conn = new MySqlConnection(myConnectionString);
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd = new($" SELECT * FROM `BodyMovement`.`personal_trainers`", conn);
+                MySqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    PersonalTrainer trainer = new();
+                    trainer.Id = int.Parse(reader["id"].ToString());
+                    trainer.Name = reader["name"].ToString();
+                    trainer.Age = int.Parse(reader["age"].ToString());
+                    trainer.Email = reader["email"].ToString();
+                    trainer.Department = reader["department"].ToString();
+                    trainer.Number = reader["number"].ToString();
+                    trainers.Add(trainer);
+                }
+                conn.Close();
+                return trainers;
+            }
+            catch (Exception ex)
+            {
+                return trainers;
+            }
+        }
 
         public bool Create(PersonalTrainer trainer)
         {

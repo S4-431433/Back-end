@@ -5,9 +5,9 @@ namespace S4_BmBackend.Logic
     public class WeightProfile
     {
         public List<User> users = new List<User>();
-        public User CreateUser(string forename, string lastname, string email, string password, string adress, int age, int lenght, DateTime birthday)
+        public User CreateUser(string forename, string lastname, string email, string password, string adress, int age, int lenght, DateTime birthday, string active)
         {
-            User user = new(forename, lastname, email, password, adress, age, lenght, birthday);
+            User user = new(forename, lastname, email, password, adress, age, lenght, birthday, active);
             users.Add(user);
             return user;
         }

@@ -27,6 +27,7 @@ namespace S4_BmBackend.Data
                     user.Email = reader["email"].ToString();
                     user.Password = reader["password"].ToString();
                     user.Adress = reader["adress"].ToString();
+                    user.Active = reader["active"].ToString();
                     user.Age = int.Parse(reader["age"].ToString());
                     user.Length = int.Parse(reader["length"].ToString());
                     user.Birthday = Convert.ToDateTime(reader["birthday"]);
@@ -60,6 +61,7 @@ namespace S4_BmBackend.Data
                     user.Email = reader["email"].ToString();
                     user.Password = reader["password"].ToString();
                     user.Adress = reader["adress"].ToString();
+                    user.Active = reader["active"].ToString();
                     user.Age = int.Parse(reader["age"].ToString());
                     user.Length = int.Parse(reader["length"].ToString());
                     user.Birthday = Convert.ToDateTime(reader["birthday"]);
@@ -125,6 +127,63 @@ namespace S4_BmBackend.Data
             catch (Exception)
             {
                 return false;
+            }
+        }
+
+        public List<int> GetActive()
+        {
+            List<int> active = new();
+            MySqlConnection conn;
+            conn = new MySqlConnection(myConnectionString);
+            try
+            {
+                conn.Open();
+                List<User> activeUsers = new();
+                MySqlCommand cmd = new($" SELECT * FROM `BodyMovement`.`users` WHERE `active` = 'true'", conn);
+                MySqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    User user = new();
+                    user.Id = int.Parse(reader["id"].ToString());
+                    activeUsers.Add(user);
+                }
+
+
+                conn.Close();
+                active.Add(activeUsers.Count);
+                active.Add(GetNonActive());
+                return active;
+            }
+            catch (Exception ex)
+            {
+                return active;
+            }
+        }
+
+        public int GetNonActive()
+        {
+            List<User> non_activeUsers = new();
+            MySqlConnection conn;
+            conn = new MySqlConnection(myConnectionString);
+            try
+            {
+                conn.Open();
+                MySqlCommand cmd = new($" SELECT * FROM `BodyMovement`.`users` WHERE `active` = 'false'", conn);
+                MySqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    User user = new();
+                    user.Id = int.Parse(reader["id"].ToString());
+                    non_activeUsers.Add(user);
+                }
+
+
+                conn.Close();
+                return non_activeUsers.Count;
+            }
+            catch (Exception ex)
+            {
+                return non_activeUsers.Count;
             }
         }
     }
